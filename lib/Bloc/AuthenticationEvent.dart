@@ -83,8 +83,6 @@ class AuthenticationEvent extends Cubit<String> {
         } else {
           emit("Password validation failed.");
         }
-      } else {
-        emit("Server error."); // Emit an error message for server errors
       }
     } catch (e) {
       emit("Error validating password: $e"); // Emit an error message if an exception occurs

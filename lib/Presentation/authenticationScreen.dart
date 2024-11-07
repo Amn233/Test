@@ -36,26 +36,7 @@ class AuthenticationScreen extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          PopupMenuButton<String>(
-            iconColor: Colors.white,
-            color: Colors.white,
-            onSelected: (value) {
-              if (value == 'Screen1') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ComplaintListScreen()),
-                );
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem<String>(
-                value: 'Screen1',
-                child: Text('Go to Complaint list Screen'),
-              ),
-            ],
-          ),
-        ],
+
       ),
       body: BlocConsumer<AuthenticationEvent, String>(
         listener: (context, state) {
@@ -109,6 +90,14 @@ class AuthenticationScreen extends StatelessWidget {
   Widget _buildAuthenticationState(Size size, BuildContext context, String state) {
     if (state.contains("successful")) {
       // If authentication is successful, show a success animation
+      Future.delayed(Duration(seconds: 1), ()  {
+        // Delay navigation to ComplaintListScreen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ComplaintListScreen()),
+        );
+      });
+
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -152,6 +141,7 @@ class AuthenticationScreen extends StatelessWidget {
     }
     return Container(); // Default case when state doesn't match
   }
+
 
   Widget _buildAuthButton(BuildContext context, Size size, String text) {
     return ElevatedButton(

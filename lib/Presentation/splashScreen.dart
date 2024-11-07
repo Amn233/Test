@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
               },
 
               child:  CustomText(
-                text: 'Welcome',
+                text: 'Welcome To',
                 fontFamily: "Plus",
                 fontSize: screenWidth * 0.08,
                 fontWeight: FontWeight.bold,
