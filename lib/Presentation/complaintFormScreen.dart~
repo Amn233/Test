@@ -1,0 +1,231 @@
+back karon to color show nhi hota theak sa import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled/CustomWidget/complaintCard.dart';
+import '../Bloc/gggg.dart';
+
+class ComplaintListScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Wrap with BlocProvider to provide the BLoC instance to the widget tree
+    return BlocProvider(
+      create: (_) => ComplaintListBloc(),
+      child: ComplaintListScreenContent(),
+    );
+  }
+}
+
+class ComplaintListScreenContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Set status bar color to red
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.red, // Red color for the status bar
+      statusBarIconBrightness: Brightness.light, // Ensure icons are visible on red background
+    ));
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                // Header Section
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(80),
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.red[300] ?? Colors.red,
+                    padding: EdgeInsets.all(35.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Create your\n',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'Complaints',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: Offset(0, 20),
+                              child: FloatingActionButton(
+                                onPressed: () {
+                                  context.read<ComplaintListBloc>().toggleDialog();
+                                },
+                                backgroundColor: Colors.white,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.red[300] ?? Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Have something to rant about?',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        TextField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            prefixIcon: Icon(Icons.search, color: Colors.grey),
+                            hintText: 'Search...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(text: 'SORT BY ', style: TextStyle(color: Colors.grey)),
+                                      TextSpan(
+                                        text: 'DATE ADDED',
+                                        style: TextStyle(
+                                          color: Colors.red[300] ?? Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(Icons.arrow_drop_down, color: Colors.red[300] ?? Colors.red),
+                              ],
+                            ),
+                          ),
+                          ComplaintCard(
+                            complaintNumber: '#000384309283',
+                            status: 'Pending',
+                            statusColor: Colors.red[200] ?? Colors.red,
+                            statusTextColor: Colors.white,
+                            name: 'Talha Ahmed',
+                            date: 'March 30, 2024 | 14:33',
+                            description: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',
+                          ),
+                          ComplaintCard(
+                            complaintNumber: '#000384309283',
+                            status: 'Pending',
+                            statusColor: Colors.red[200] ?? Colors.red,
+                            statusTextColor: Colors.white,
+                            name: 'Talha Ahmed',
+                            date: 'March 30, 2024 | 14:33',
+                            description: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',
+                          ),
+                          ComplaintCard(
+                            complaintNumber: '#000384309283',
+                            status: 'Resolved',
+                            statusColor: Colors.green[200] ?? Colors.green,
+                            statusTextColor: Colors.white,
+                            name: 'Talha Ahmed',
+                            date: 'March 30, 2024 | 14:33',
+                            description: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',
+                          ),
+                          // Add more ComplaintCards here
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Conditional Overlay and Dialog
+          BlocBuilder<ComplaintListBloc, bool>(
+            builder: (context, isDialogOpen) {
+              if (isDialogOpen) {
+                return GestureDetector(
+                  onTap: () => context.read<ComplaintListBloc>().closeDialog(),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(color: Colors.black.withOpacity(0.5)),
+                  ),
+                );
+              }
+              return SizedBox.shrink();
+            },
+          ),
+          BlocBuilder<ComplaintListBloc, bool>(
+            builder: (context, isDialogOpen) {
+              if (isDialogOpen) {
+                return Center(
+                  child: Container(
+                    width: 350,
+                    height: 501,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))],
+                    ),
+                    child: Column(
+                      children: [
+                        TextField(decoration: InputDecoration(labelText: "Complaint Category")),
+                        SizedBox(height: 16),
+                        TextField(decoration: InputDecoration(labelText: "Details")),
+                        SizedBox(height: 24),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red[400]),
+                          onPressed: () => context.read<ComplaintListBloc>().closeDialog(),
+                          child: Text('Submit', style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              return SizedBox.shrink();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

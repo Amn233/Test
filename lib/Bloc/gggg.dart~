@@ -1,0 +1,51 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../model.dart';
+
+class ComplaintListBloc extends Cubit<ComplaintListState> {
+  ComplaintListBloc() : super(ComplaintListState(filteredComplaints: allComplaints));
+
+  static List<Complaint> allComplaints = [
+    Complaint('#000384309283', 'Pending', 'Talha ', 'March 30, 2024 | 14:33', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',),
+    Complaint('#000384309284', 'Pending', 'Ahmad', 'March 30, 2024 | 14:33', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',),
+    Complaint('#000384309285', 'Resolved', 'Ali Khan', 'March 29, 2024 | 12:45', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups...',),
+    // Add more complaints as needed
+  ];
+
+  // Toggle dialog visibility
+  void toggleDialog() => emit(state.copyWith(isDialogOpen: !state.isDialogOpen));
+
+  void closeDialog() => emit(state.copyWith(isDialogOpen: false));
+
+  void openDialog() => emit(state.copyWith(isDialogOpen: true));
+
+  // Search and filter complaints based on search text
+  void searchComplaints(String searchText) {
+    if (searchText.isEmpty) {
+      // If search text is empty, show all complaints
+      emit(state.copyWith(filteredComplaints: allComplaints));
+    } else {
+      // Filter complaints based on the search text
+      List<Complaint> filtered = allComplaints
+          .where((complaint) =>
+      complaint.complaintNumber.contains(searchText) ||
+          complaint.name.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
+      emit(state.copyWith(filteredComplaints: filtered));
+    }
+  }
+}
+
+
+class ComplaintListState {
+  final bool isDialogOpen;
+  final List<Complaint> filteredComplaints;
+
+  ComplaintListState({required this.filteredComplaints, this.isDialogOpen = false});
+
+  ComplaintListState copyWith({bool? isDialogOpen, List<Complaint>? filteredComplaints}) {
+    return ComplaintListState(
+      filteredComplaints: filteredComplaints ?? this.filteredComplaints,
+      isDialogOpen: isDialogOpen ?? this.isDialogOpen,
+    );
+  }
+}
