@@ -1,12 +1,15 @@
-Flow of the app:
+## App Flow
 
+## Splash Screen: 
+When you open the app, the splash screen will appear first.
 
-Biometric Authentication: When you open the app, biometric authentication will appear first.
+## Biometric Authentication:
+After the splash screen, you’ll see the biometric authentication screen.
+ 
+## Complaint Screen (Post-Authentication):
+Once biometric authentication is successfully verified, you’ll be directed to the Complaint List Screen.
 
-Side Menu in the App Bar You’ll see the side menu icon in the app bar at the top.
+## Using the Complaint Screen:
 
-Accessing the Complaint Screen: Click the side menu icon in the app bar, and select the option for the Complaint List Screen. This will take you to the complaint section.
-
-Search Function: On the Complaint Screen, click on the search field to search by name or complaint number. After entering your search term, click the search button to initiate the search.
-
-Adding a New Complaint: To create a new complaint, click on the plus button. This will open the Complaint Form Screen, where you can fill in the necessary details and submit a new complaint.
+Searching for Complaints: Use the search field to find complaints by name or complaint number. After entering a term, press the search button to initiate the search.
+Adding a New Complaint: To create a new complaint, click the plus button (+). This will open the Complaint Form Screen, where you can fill out and submit the details for a new complaint.
