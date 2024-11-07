@@ -1,20 +1,10 @@
-<<<<<<< HEAD
-# untitled
+Flow of the app:
+Biometric Authentication: When you open the app, biometric authentication will appear first.
 
-A new Flutter project.
+Side Menu in the App Bar You’ll see the side menu icon in the app bar at the top.
 
-## Getting Started
+Accessing the Complaint Screen: Click the side menu icon in the app bar, and select the option for the Complaint List Screen. This will take you to the complaint section.
 
-This project is a starting point for a Flutter application.
+Search Function: On the Complaint Screen, click on the search field to search by name or complaint number. After entering your search term, click the search button to initiate the search.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# Test
->>>>>>> bd6eea649d4ed47e768de09a9b226f4313ab93f2
+Adding a New Complaint: To create a new complaint, click on the plus button. This will open the Complaint Form Screen, where you can fill in the necessary details and submit a new complaint.
