@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'customText.dart';
 
 class ComplaintCard extends StatelessWidget {
@@ -12,7 +11,7 @@ class ComplaintCard extends StatelessWidget {
   final String date;
   final String description;
 
-  ComplaintCard({
+  const ComplaintCard({super.key,
     required this.complaintNumber,
     required this.status,
     required this.statusColor,
@@ -31,11 +30,11 @@ class ComplaintCard extends StatelessWidget {
       color: Colors.white,
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      elevation: 5, // This controls the shadow's intensity
+      elevation: 5,
       child: Padding(
         padding: EdgeInsets.only(
           top: 3,
-          left: screenWidth * 0.04, // Adjust padding based on screen width
+          left: screenWidth * 0.04,
           right: screenWidth * 0.04,
           bottom: 16,
         ),
@@ -68,8 +67,8 @@ class ComplaintCard extends StatelessWidget {
                   padding: const EdgeInsets.all(18.0),
                   child: Container(
                     height: 43,
-                    width: screenWidth * 0.3, // Adjust the width based on screen size
-                    alignment: Alignment.center, // Center the text inside
+                    width: screenWidth * 0.3,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: statusColor,
                       borderRadius: BorderRadius.circular(10),
@@ -91,7 +90,7 @@ class ComplaintCard extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   "assets/Svgs/Profile.svg",
-                  width: screenWidth * 0.05, // Adjust size based on screen width
+                  width: screenWidth * 0.05,
                 ),
                 const SizedBox(width: 4),
 
@@ -105,7 +104,7 @@ class ComplaintCard extends StatelessWidget {
                 const Spacer(),
                 SvgPicture.asset(
                   "assets/Svgs/calendar.svg",
-                  width: screenWidth * 0.05, // Adjust size based on screen width
+                  width: screenWidth * 0.05,
                 ),
                 const SizedBox(width: 4),
 
@@ -130,7 +129,7 @@ class ComplaintCard extends StatelessWidget {
             const SizedBox(height: 15),
             CustomText(
               text:  description,
-              color: Color(0xFF252525),
+              color: const Color(0xFF252525),
               fontFamily: "Plus",
               fontSize: 12,
               maxLines: 3,

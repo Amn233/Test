@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:untitled/CustomWidget/complaintCard.dart';
 import 'package:untitled/CustomWidget/customText.dart';
@@ -75,7 +74,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFDE7A72).withOpacity(0.7), Color(0xFFDE7A72)],
+            colors: [const Color(0xFFDE7A72).withOpacity(0.7), const Color(0xFFDE7A72)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -130,7 +129,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
   }
 
   Widget _buildHeaderSubtitle() {
-    return Align(
+    return const Align(
       alignment: Alignment.centerLeft,
       child: CustomText(
         text: 'Have something to rant about?',
@@ -217,7 +216,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
           );
         }
         return ListView.builder(
-          padding: EdgeInsets.only(top: 3,left: 7,right: 7),
+          padding: const EdgeInsets.only(top: 3,left: 7,right: 7),
           itemCount: state.filteredComplaints.length,
           itemBuilder: (context, index) {
             final complaint = state.filteredComplaints[index];
@@ -281,11 +280,11 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -313,17 +312,17 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
         floatingLabelBehavior: FloatingLabelBehavior.always,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 2),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 1.5),
         ),
-        suffixIcon: Icon(Icons.arrow_forward_ios_outlined, size: 15, color: Color(0xFFDE7A72)),
+        suffixIcon: const Icon(Icons.arrow_forward_ios_outlined, size: 15, color: Color(0xFFDE7A72)),
         hintText: 'Payment',
         hintStyle: const TextStyle(color: Colors.grey),
         contentPadding: const EdgeInsets.all(8),
@@ -340,15 +339,15 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
         floatingLabelBehavior: FloatingLabelBehavior.always,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 2),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Color(0xFFDE7A72), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFFDE7A72), width: 1.5),
         ),
         hintText: 'Write your complaint ...',
         hintStyle: const TextStyle(color: Colors.grey),
@@ -361,7 +360,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
+        const CustomText(
           text: 'Attachments',
           fontFamily: "Plus",
           fontWeight: FontWeight.w600,
@@ -377,7 +376,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.grey[300]!, style: BorderStyle.solid),
           ),
-          child: Center(
+          child: const Center(
             child: Icon(Icons.add, color: Color(0xFFDE7A72)),
           ),
         ),
@@ -392,7 +391,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
         height: 50,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFDE7A72),
+            backgroundColor: const Color(0xFFDE7A72),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
@@ -422,7 +421,7 @@ class _ComplaintListScreenContentState extends State<ComplaintListScreenContent>
           width: 140,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: Color(0xFFDE7A72),
+            color: const Color(0xFFDE7A72),
             borderRadius: BorderRadius.circular(10),
           ),
           child: const Center(

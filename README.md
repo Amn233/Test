@@ -1,4 +1,6 @@
 Flow of the app:
+
+
 Biometric Authentication: When you open the app, biometric authentication will appear first.
 
 Side Menu in the App Bar You’ll see the side menu icon in the app bar at the top.

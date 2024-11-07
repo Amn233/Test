@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:untitled/Bloc/AuthenticationEvent.dart';
 import 'package:untitled/CustomWidget/customText.dart';
 import 'package:untitled/Presentation/complaintListScreen.dart';
-import '../Bloc/ComplaintListBloc.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
@@ -12,7 +12,7 @@ class AuthenticationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     Size size = MediaQuery.of(context).size; // Use const for size
+    Size size = MediaQuery.of(context).size; // Use const for size
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -27,7 +27,7 @@ class AuthenticationScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -44,12 +44,12 @@ class AuthenticationScreen extends StatelessWidget {
               if (value == 'Screen1') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ComplaintListScreen()),
+                  MaterialPageRoute(builder: (context) => const ComplaintListScreen()),
                 );
               }
             },
             itemBuilder: (context) => [
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'Screen1',
                 child: Text('Go to Complaint list Screen'),
               ),
@@ -68,9 +68,9 @@ class AuthenticationScreen extends StatelessWidget {
             case "Initial":
               return _buildInitialState(size, context);
             case "Authenticating":
-              return Center(child: CircularProgressIndicator(color: Color(0xFFDE7A72),));
+              return const Center(child: CircularProgressIndicator(color: Color(0xFFDE7A72),));
             default:
-              return _buildErrorState(size, context, state);
+              return _buildAuthenticationState(size, context, state);
           }
         },
       ),
@@ -84,10 +84,9 @@ class AuthenticationScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            Icons.fingerprint,
-            size: size.width * 0.25,
-            color: AuthenticationScreen.primaryColor,
+          Lottie.asset(
+            'assets/fingerprint.json', // Lottie animation for fingerprint authentication
+            width: size.width * 0.3,
           ),
           SizedBox(height: size.height * 0.03),
           Center(
@@ -107,28 +106,51 @@ class AuthenticationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorState(Size size, BuildContext context, String state) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.lock_open,
-            size: size.width * 0.25,
-            color: AuthenticationScreen.primaryColor,
-          ),
-          SizedBox(height: size.height * 0.03),
-          CustomText(
-            text: state,
-            fontSize: size.width * 0.05,
-            color: Colors.grey[700],
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: size.height * 0.04),
-          _buildAuthButton(context, size, "Try Again"),
-        ],
-      ),
-    );
+  Widget _buildAuthenticationState(Size size, BuildContext context, String state) {
+    if (state.contains("successful")) {
+      // If authentication is successful, show a success animation
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/fingerprint1.json', // Replace with your success animation
+              width: size.width * 0.6,
+            ),
+            SizedBox(height: size.height * 0.00),
+            CustomText(
+              text: 'Authentication Successful!',
+              fontSize: size.width * 0.05,
+              color: Color(0xFFDE7A72),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    } else if (state.contains("Error") || state.contains("failed")) {
+      // If authentication failed, show a failure (lock) animation
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/error1.json', // Replace with your failure animation
+              width: size.width * 0.5,
+            ),
+            SizedBox(height: size.height * 0.02),
+            CustomText(
+              text: 'Authentication Failed!',
+              fontSize: size.width * 0.05,
+              color: Colors.red,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: size.height * 0.04),
+            _buildAuthButton(context, size, "Try Again"),
+          ],
+        ),
+      );
+    }
+    return Container(); // Default case when state doesn't match
   }
 
   Widget _buildAuthButton(BuildContext context, Size size, String text) {
@@ -136,10 +158,6 @@ class AuthenticationScreen extends StatelessWidget {
       onPressed: () {
         context.read<AuthenticationEvent>().authenticateUser();
       },
-      child: CustomText(
-        text: text,
-        color: Colors.white,
-      ),
       style: ElevatedButton.styleFrom(
         backgroundColor: AuthenticationScreen.primaryColor,
         padding: EdgeInsets.symmetric(
@@ -155,6 +173,10 @@ class AuthenticationScreen extends StatelessWidget {
         ),
         elevation: 6,
       ),
+      child: CustomText(
+        text: text,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -162,10 +184,10 @@ class AuthenticationScreen extends StatelessWidget {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       backgroundColor: color,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

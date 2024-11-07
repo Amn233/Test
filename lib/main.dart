@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/Bloc/AuthenticationEvent.dart';
+import 'package:untitled/Presentation/splashScreen.dart';
 import 'Presentation/authenticationScreen.dart';
 
 void main() {
@@ -19,10 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
 
       ),
-      home: BlocProvider(
-        create: (_) => AuthenticationEvent(),
-        child: AuthenticationScreen(),
-      ),
+      home: SplashScreen(),
 
     );
   }
